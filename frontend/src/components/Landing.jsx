@@ -190,18 +190,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 py-12 bg-white dark:bg-slate-950 transition-colors duration-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
-          <div className="text-left">
-            <span className="font-bold text-slate-900 dark:text-white text-sm block">Smart Lead CRM</span>
-          </div>
-          <div className="mt-4 sm:mt-0 text-left sm:text-right text-xs text-slate-400 dark:text-slate-500 space-y-1">
-            <p>Database: MySQL (Aiven) | Host: Render Cloud Containers</p>
-            <p>© 2026 Academic Submission. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+
     </div>
   );
 };
