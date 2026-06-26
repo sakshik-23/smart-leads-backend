@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import {
-  LogOut, Plus, Search, Filter, RefreshCw, Download, Trash2, Edit,
-  User, Sun, Moon, Database, ChevronLeft, ChevronRight, Phone, CheckCircle,
-  XCircle, TrendingUp, Compass, Award, ExternalLink
+  LogOut, Plus, Search, RefreshCw, Download, Trash2, Edit,
+  Database, ChevronLeft, ChevronRight, Phone, CheckCircle,
+  XCircle, TrendingUp, Compass, Sun, Moon, GraduationCap, LayoutDashboard
 } from 'lucide-react';
 
 const Dashboard = () => {
@@ -145,13 +145,6 @@ const Dashboard = () => {
 
   // Handle CSV Export
   const handleExportCSV = () => {
-    let url = 'http://localhost:8080/api/leads/export?';
-    if (debouncedSearch) url += `search=${encodeURIComponent(debouncedSearch)}&`;
-    if (statusFilter) url += `status=${statusFilter}&`;
-    if (sourceFilter) url += `source=${sourceFilter}&`;
-    
-    // Add Token in Query parameter or trigger file download
-    // Since our backend endpoint validates Bearer token, we can fetch it via api and trigger download in JS
     api.get(`/leads/export`, {
       params: {
         search: debouncedSearch || undefined,
@@ -232,20 +225,20 @@ const Dashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'NEW': return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
-      case 'CONTACTED': return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
-      case 'QUALIFIED': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
-      case 'LOST': return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
-      default: return 'bg-slate-500/10 text-slate-400 border-slate-500/30';
+      case 'NEW': return 'bg-blue-50 dark:bg-blue-950/40 text-blue-750 dark:text-blue-450 border-blue-200 dark:border-blue-800/40';
+      case 'CONTACTED': return 'bg-amber-50 dark:bg-amber-950/40 text-amber-750 dark:text-amber-450 border-amber-200 dark:border-amber-800/40';
+      case 'QUALIFIED': return 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-750 dark:text-emerald-450 border-emerald-200 dark:border-emerald-800/40';
+      case 'LOST': return 'bg-rose-50 dark:bg-rose-950/40 text-rose-750 dark:text-rose-450 border-rose-200 dark:border-rose-800/40';
+      default: return 'bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-400 border-slate-200 dark:border-slate-800';
     }
   };
 
   const getSourceColor = (source) => {
     switch (source) {
-      case 'WEBSITE': return 'bg-indigo-500/10 text-indigo-400';
-      case 'INSTAGRAM': return 'bg-pink-500/10 text-pink-400';
-      case 'REFERRAL': return 'bg-purple-500/10 text-purple-400';
-      default: return 'bg-slate-500/10 text-slate-400';
+      case 'WEBSITE': return 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400';
+      case 'INSTAGRAM': return 'bg-pink-50 dark:bg-pink-950/40 text-pink-700 dark:text-pink-400';
+      case 'REFERRAL': return 'bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-400';
+      default: return 'bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-400';
     }
   };
 
@@ -254,34 +247,36 @@ const Dashboard = () => {
     : '0.0';
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100">
+    <div className="min-h-screen bg-slate-50 text-slate-800 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 font-sans">
       
-      {/* Header */}
-      <header className="border-b border-slate-200 bg-white/80 dark:bg-slate-900/50 backdrop-blur sticky top-0 z-10 px-6 py-4 dark:border-slate-800">
+      {/* Top Navbar */}
+      <header className="border-b border-slate-200 bg-white dark:bg-slate-900 sticky top-0 z-40 px-6 py-3.5 dark:border-slate-800 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
+          
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-650 rounded-lg text-white">
-              <Database className="w-6 h-6" />
+            <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 font-bold border border-slate-200 dark:border-slate-800">
+              SL
             </div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Smart Leads</h1>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Lead Management System</p>
+              <h1 className="text-base font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
+                Smart Lead CRM
+                <span className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-750 rounded text-[9px] font-semibold text-slate-500 font-mono">
+                  STUDENT PORTAL
+                </span>
+              </h1>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">MCA CAPSTONE PROJECT</p>
             </div>
           </div>
           
           <div className="flex items-center gap-4">
             {/* User Profile */}
-            <div className="flex items-center gap-2 border-r border-slate-200 dark:border-slate-850 pr-4">
-              <div className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-indigo-650 dark:text-indigo-400 font-bold border border-slate-300 dark:border-slate-700">
+            <div className="flex items-center gap-2.5 border-r border-slate-200 dark:border-slate-800 pr-4">
+              <div className="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-350 font-bold border border-slate-200 dark:border-slate-700 text-sm">
                 {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
               </div>
               <div className="text-left hidden md:block">
-                <p className="text-sm font-medium text-slate-800 dark:text-slate-200">{user.name || 'User'}</p>
-                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold border ${
-                  user.role === 'ADMIN' 
-                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-300 dark:border-indigo-500/20' 
-                    : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/20'
-                }`}>
+                <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">{user.name || 'User'}</p>
+                <span className="text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700 px-1 rounded font-bold font-mono">
                   {user.role}
                 </span>
               </div>
@@ -290,90 +285,116 @@ const Dashboard = () => {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 rounded-xl transition-colors border border-slate-200 dark:border-slate-800"
+              className="p-1.5 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700 cursor-pointer"
               title="Toggle Theme"
             >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
             {/* Logout */}
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-3 py-2 text-rose-600 hover:text-white bg-rose-50 hover:bg-rose-600 border border-rose-200 hover:border-rose-600 dark:bg-rose-500/10 dark:hover:bg-rose-650 dark:border-rose-500/20 rounded-xl transition-all text-sm font-medium"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-850 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 border border-slate-900 dark:border-white rounded-lg transition-all text-xs font-semibold cursor-pointer shadow-sm"
             >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Sign Out</span>
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out</span>
             </button>
           </div>
+
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      {/* Main Container */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         
-        {/* Error alert */}
+        {/* Error Notification */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-200 p-4 rounded-xl text-sm flex justify-between items-center">
+          <div className="bg-red-50 border border-red-200 text-red-800 dark:bg-red-950/30 dark:border-red-900/40 dark:text-red-300 p-3.5 rounded-lg text-xs flex justify-between items-center">
             <span>{error}</span>
-            <button onClick={() => setError('')} className="text-red-650 hover:text-red-800 dark:text-red-400 dark:hover:text-white font-bold">×</button>
+            <button onClick={() => setError('')} className="text-red-500 hover:text-red-800 dark:text-red-400 font-bold text-lg select-none cursor-pointer">×</button>
           </div>
         )}
 
-        {/* Analytics Cards */}
-        <section className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-5 rounded-2xl relative overflow-hidden shadow-sm dark:shadow-lg">
-            <div className="absolute top-4 right-4 text-indigo-500/10 dark:text-indigo-500/20"><TrendingUp className="w-8 h-8" /></div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Total Leads</p>
-            <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">{metrics.total}</p>
-          </div>
-          <div className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-5 rounded-2xl relative overflow-hidden shadow-sm dark:shadow-lg">
-            <div className="absolute top-4 right-4 text-blue-500/10 dark:text-blue-500/20"><Phone className="w-8 h-8" /></div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">New Leads</p>
-            <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">{metrics.new}</p>
-          </div>
-          <div className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-5 rounded-2xl relative overflow-hidden shadow-sm dark:shadow-lg">
-            <div className="absolute top-4 right-4 text-amber-500/10 dark:text-amber-500/20"><Compass className="w-8 h-8" /></div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Contacted</p>
-            <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">{metrics.contacted}</p>
-          </div>
-          <div className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-5 rounded-2xl relative overflow-hidden shadow-sm dark:shadow-lg">
-            <div className="absolute top-4 right-4 text-emerald-500/10 dark:text-emerald-500/20"><CheckCircle className="w-8 h-8" /></div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Qualified</p>
-            <div className="flex items-baseline gap-2 mt-2">
-              <span className="text-3xl font-extrabold text-slate-900 dark:text-white">{metrics.qualified}</span>
-              <span className="text-xs text-emerald-600 dark:text-emerald-400">({conversionRate}%)</span>
+        {/* Bento Grid Analytics (21st.dev design spec) */}
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          
+          {/* Main Bento Hero Card: Overview & Conversion Rate */}
+          <div className="md:col-span-2 border border-slate-200 dark:border-slate-800 rounded-xl p-5 bg-white dark:bg-slate-900 flex justify-between items-center shadow-sm">
+            <div>
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500 block mb-1 font-mono">
+                Pipeline Efficiency
+              </span>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Sales Conversion Ratio</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xs">Ratio of qualified leads against total sourcing volume.</p>
+            </div>
+            
+            <div className="text-right border-l border-slate-150 dark:border-slate-800 pl-6 shrink-0">
+              <span className="text-3xl font-black text-slate-900 dark:text-white">{conversionRate}%</span>
+              <span className="block text-[10px] font-semibold text-emerald-600 dark:text-emerald-450 mt-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/30 px-1.5 py-0.5 rounded">
+                ↑ 2.4% this week
+              </span>
             </div>
           </div>
-          <div className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-5 rounded-2xl relative overflow-hidden shadow-sm dark:shadow-lg col-span-2 lg:col-span-1">
-            <div className="absolute top-4 right-4 text-rose-500/10 dark:text-rose-500/20"><XCircle className="w-8 h-8" /></div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Lost Leads</p>
-            <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2">{metrics.lost}</p>
+
+          {/* Bento Card 2: Total Leads */}
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-5 bg-white dark:bg-slate-900 flex flex-col justify-between shadow-sm">
+            <div className="flex justify-between items-start">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500 font-mono">
+                Volume
+              </span>
+              <LayoutDashboard className="w-4 h-4 text-indigo-500" />
+            </div>
+            <div className="mt-4">
+              <span className="text-2xl font-black text-slate-900 dark:text-white">{metrics.total}</span>
+              <span className="block text-[10px] text-slate-400 dark:text-slate-500 mt-1">Total leads registered</span>
+            </div>
           </div>
+
+          {/* Bento Card 3: Status Breakdown mini summary */}
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl p-5 bg-white dark:bg-slate-900 flex flex-col justify-between shadow-sm">
+            <div className="flex justify-between items-start">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500 font-mono">
+                Pipeline Stages
+              </span>
+              <TrendingUp className="w-4 h-4 text-emerald-500" />
+            </div>
+            <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] font-mono">
+              <div className="border border-slate-100 dark:border-slate-850 p-1.5 rounded">
+                <span className="block text-slate-400 uppercase text-[9px]">NEW</span>
+                <span className="font-bold text-slate-800 dark:text-white">{metrics.new}</span>
+              </div>
+              <div className="border border-slate-100 dark:border-slate-850 p-1.5 rounded">
+                <span className="block text-slate-400 uppercase text-[9px]">ACTIVE</span>
+                <span className="font-bold text-slate-800 dark:text-white">{metrics.contacted}</span>
+              </div>
+            </div>
+          </div>
+
         </section>
 
-        {/* Filters and Actions */}
-        <section className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 p-6 rounded-2xl shadow-sm dark:shadow-xl flex flex-col md:flex-row gap-4 justify-between items-center">
+        {/* Action Panel: Filters & Buttons */}
+        <section className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 p-5 rounded-xl shadow-sm flex flex-col lg:flex-row gap-4 justify-between items-center">
           
-          {/* Inputs */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full md:w-auto md:flex-grow max-w-4xl">
-            {/* Search */}
+          {/* Filters */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full lg:w-auto lg:flex-grow max-w-4xl">
+            {/* Search Input */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-450 dark:text-slate-500" />
               <input
                 type="text"
                 placeholder="Search name or email..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all"
               />
             </div>
 
-            {/* Status Filter */}
+            {/* Status Dropdown */}
             <div className="relative">
               <select
                 value={statusFilter}
                 onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(0); }}
-                className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-sm text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer appearance-none"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-xs text-slate-650 dark:text-slate-350 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 cursor-pointer"
               >
                 <option value="">All Statuses</option>
                 <option value="NEW">New</option>
@@ -383,12 +404,12 @@ const Dashboard = () => {
               </select>
             </div>
 
-            {/* Source Filter */}
+            {/* Source Dropdown */}
             <div className="relative">
               <select
                 value={sourceFilter}
                 onChange={(e) => { setSourceFilter(e.target.value); setCurrentPage(0); }}
-                className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-sm text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer appearance-none"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-xs text-slate-655 dark:text-slate-350 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 cursor-pointer"
               >
                 <option value="">All Sources</option>
                 <option value="WEBSITE">Website</option>
@@ -398,108 +419,111 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Action buttons */}
-          <div className="flex gap-2 w-full md:w-auto shrink-0 justify-end">
+          {/* Action trigger group */}
+          <div className="flex gap-2 w-full lg:w-auto shrink-0 justify-end">
             <button
               onClick={handleResetFilters}
-              className="p-2.5 text-slate-500 hover:text-slate-850 dark:text-slate-400 dark:hover:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-800 transition-colors"
+              className="p-2 text-slate-500 hover:text-slate-850 dark:text-slate-400 dark:hover:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 rounded-lg border border-slate-200 dark:border-slate-700 transition-all cursor-pointer"
               title="Reset Filters"
             >
-              <RefreshCw className="w-5 h-5" />
+              <RefreshCw className="w-4 h-4" />
             </button>
+            
             <button
               onClick={handleExportCSV}
-              className="flex items-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-300 dark:hover:text-white rounded-xl border border-slate-200 dark:border-slate-850 transition-all text-sm font-semibold"
+              className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-750 hover:text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-300 dark:hover:text-white rounded-lg border border-slate-200 dark:border-slate-700 transition-all text-xs font-semibold cursor-pointer"
             >
-              <Download className="w-4 h-4" />
+              <Download className="w-3.5 h-3.5" />
               Export CSV
             </button>
+            
             <button
               onClick={() => { resetForm(); setModalOpen(true); }}
-              className="flex items-center gap-2 px-4 py-2.5 bg-indigo-650 hover:bg-indigo-600 text-white rounded-xl transition-all text-sm font-semibold shadow-sm shadow-indigo-600/10 dark:shadow-indigo-900/30"
+              className="flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 border border-slate-900 dark:border-white rounded-lg transition-all text-xs font-semibold shadow-sm cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
               Add Lead
             </button>
           </div>
+
         </section>
 
-        {/* Lead Table */}
-        <section className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-850 rounded-2xl overflow-hidden shadow-sm dark:shadow-xl">
+        {/* Lead Grid/Table Section */}
+        <section className="bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
           {loading ? (
-            <div className="p-20 flex flex-col items-center justify-center gap-4 text-slate-400">
-              <svg className="animate-spin h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24">
+            <div className="p-20 flex flex-col items-center justify-center gap-3 text-slate-400">
+              <svg className="animate-spin h-6 w-6 text-slate-500" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
-              <span>Loading leads data...</span>
+              <span className="text-xs">Loading leads from MySQL...</span>
             </div>
           ) : leads.length === 0 ? (
-            <div className="p-20 text-center flex flex-col items-center justify-center max-w-md mx-auto">
-              <div className="p-4 bg-slate-100 dark:bg-slate-800/40 text-slate-400 dark:text-slate-500 rounded-full mb-4">
-                <Database className="w-10 h-10" />
+            <div className="p-20 text-center flex flex-col items-center justify-center max-w-sm mx-auto">
+              <div className="p-3 bg-slate-100 dark:bg-slate-800/40 text-slate-400 dark:text-slate-550 rounded-full mb-3 border border-slate-200 dark:border-slate-700">
+                <Database className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">No leads found</h3>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-2">Try adjusting your filters, searching for another keyword, or adding a new lead record to the list.</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">No lead records found</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-xs mt-1.5 leading-relaxed">No matching lead rows resolved. Update filters or register a new record.</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+              <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50 dark:bg-slate-950/20 text-xs font-semibold text-slate-550 dark:text-slate-400 uppercase">
-                    <th className="py-4 px-6">Name</th>
-                    <th className="py-4 px-6">Email</th>
-                    <th className="py-4 px-6">Status</th>
-                    <th className="py-4 px-6">Source</th>
-                    <th className="py-4 px-6">Assigned To</th>
-                    <th className="py-4 px-6 cursor-pointer hover:text-slate-800 dark:hover:text-white" onClick={() => {
+                  <tr className="border-b border-slate-200 bg-slate-50 dark:bg-slate-950/20 text-slate-500 dark:text-slate-450 uppercase font-semibold">
+                    <th className="py-3 px-5">Name</th>
+                    <th className="py-3 px-5">Email</th>
+                    <th className="py-3 px-5">Status</th>
+                    <th className="py-3 px-5">Source</th>
+                    <th className="py-3 px-5">Assigned Agent</th>
+                    <th className="py-3 px-5 cursor-pointer hover:text-slate-900 dark:hover:text-white" onClick={() => {
                       setSortDir(sortDir === 'ASC' ? 'DESC' : 'ASC');
                       setSortBy('createdAt');
                     }}>
                       Created At {sortBy === 'createdAt' && (sortDir === 'ASC' ? '▲' : '▼')}
                     </th>
-                    <th className="py-4 px-6 text-right">Actions</th>
+                    <th className="py-3 px-5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-150 dark:divide-slate-850 text-sm text-slate-650 dark:text-slate-300">
+                <tbody className="divide-y divide-slate-150 dark:divide-slate-850 text-slate-655 dark:text-slate-350 font-sans">
                   {leads.map((lead) => (
-                    <tr key={lead.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/30 transition-colors">
-                      <td className="py-4 px-6 text-slate-900 dark:text-white font-medium">{lead.name}</td>
-                      <td className="py-4 px-6 text-slate-500 dark:text-slate-400">{lead.email}</td>
-                      <td className="py-4 px-6">
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${getStatusColor(lead.status)}`}>
+                    <tr key={lead.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/20 transition-colors">
+                      <td className="py-3 px-5 text-slate-900 dark:text-white font-medium">{lead.name}</td>
+                      <td className="py-3 px-5">{lead.email}</td>
+                      <td className="py-3 px-5">
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${getStatusColor(lead.status)}`}>
                           {lead.status}
                         </span>
                       </td>
-                      <td className="py-4 px-6">
-                        <span className={`px-2 py-0.5 rounded text-xs font-semibold ${getSourceColor(lead.source)}`}>
+                      <td className="py-3 px-5">
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${getSourceColor(lead.source)}`}>
                           {lead.source}
                         </span>
                       </td>
-                      <td className="py-4 px-6">
-                        <span className="text-slate-550 dark:text-slate-400">{lead.assignedToName || 'Unassigned'}</span>
+                      <td className="py-3 px-5 font-mono text-[11px] text-slate-500 dark:text-slate-450">
+                        {lead.assignedToName || 'Unassigned'}
                       </td>
-                      <td className="py-4 px-6 text-slate-500 dark:text-slate-400">
+                      <td className="py-3 px-5 text-slate-400">
                         {new Date(lead.createdAt).toLocaleDateString(undefined, {
                           year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
                         })}
                       </td>
-                      <td className="py-4 px-6 text-right">
-                        <div className="flex gap-2 justify-end">
+                      <td className="py-3 px-5 text-right">
+                        <div className="flex gap-1.5 justify-end">
                           <button
                             onClick={() => handleEditClick(lead)}
-                            className="p-1.5 text-slate-500 hover:text-indigo-650 bg-slate-100 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-indigo-400 dark:bg-slate-800/30 dark:hover:bg-slate-800 rounded transition-colors"
+                            className="p-1 text-slate-500 hover:text-slate-850 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors cursor-pointer"
                             title="Edit Lead"
                           >
-                            <Edit className="w-4 h-4" />
+                            <Edit className="w-3.5 h-3.5" />
                           </button>
                           {user.role === 'ADMIN' && (
                             <button
                               onClick={() => handleDeleteClick(lead.id)}
-                              className="p-1.5 text-slate-500 hover:text-rose-650 bg-slate-100 hover:bg-slate-200 dark:text-slate-400 dark:hover:text-rose-400 dark:bg-slate-800/30 dark:hover:bg-slate-800 rounded transition-colors"
+                              className="p-1 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded transition-colors cursor-pointer"
                               title="Delete Lead"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           )}
                         </div>
@@ -511,9 +535,9 @@ const Dashboard = () => {
             </div>
           )}
 
-          {/* Pagination Controls */}
+          {/* Pagination */}
           {leads.length > 0 && (
-            <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-850 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/20 text-sm text-slate-500 dark:text-slate-400">
+            <div className="px-5 py-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/20 text-xs text-slate-500 dark:text-slate-400">
               <div>
                 Showing <span className="text-slate-900 dark:text-white font-medium">{currentPage * pageSize + 1}</span> to{' '}
                 <span className="text-slate-900 dark:text-white font-medium">
@@ -525,36 +549,37 @@ const Dashboard = () => {
                 <button
                   disabled={currentPage === 0}
                   onClick={() => setCurrentPage(currentPage - 1)}
-                  className="p-2 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  className="p-1.5 border border-slate-200 dark:border-slate-850 rounded-lg text-slate-700 hover:text-slate-900 dark:text-slate-350 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   disabled={currentPage + 1 >= totalPages}
                   onClick={() => setCurrentPage(currentPage + 1)}
-                  className="p-2 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                  className="p-1.5 border border-slate-200 dark:border-slate-850 rounded-lg text-slate-700 hover:text-slate-900 dark:text-slate-350 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
           )}
         </section>
+
       </main>
 
-      {/* CRUD Modal Form */}
+      {/* Modal dialog */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="w-full max-w-md bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 rounded-2xl shadow-2xl p-6 relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                {editingLeadId ? 'Edit Lead Record' : 'Add New Lead'}
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-white border border-slate-200 dark:bg-slate-900 dark:border-slate-800 rounded-xl shadow-lg p-6 relative overflow-hidden">
+            
+            <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-150 dark:border-slate-850">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <GraduationCap className="w-4 h-4 text-indigo-500" />
+                {editingLeadId ? 'Modify Lead Record' : 'Record New Sourced Lead'}
               </h3>
               <button
                 onClick={() => setModalOpen(false)}
-                className="text-slate-400 hover:text-slate-650 dark:hover:text-white text-2xl font-bold font-sans"
+                className="text-slate-400 hover:text-slate-655 dark:hover:text-white text-xl font-bold cursor-pointer select-none"
               >
                 ×
               </button>
@@ -562,36 +587,36 @@ const Dashboard = () => {
 
             <form onSubmit={handleSaveLead} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Lead Name</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Lead Name</label>
                 <input
                   type="text"
                   required
                   value={leadForm.name}
                   onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
-                  placeholder="e.g. Rahul Kumar"
-                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm"
+                  placeholder="Rahul Kumar"
+                  className="block w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Email Address</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Email Address</label>
                 <input
                   type="email"
                   required
                   value={leadForm.email}
                   onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
-                  placeholder="rahul@example.com"
-                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm"
+                  placeholder="rahul@gmail.com"
+                  className="block w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Status</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Status</label>
                   <select
                     value={leadForm.status}
                     onChange={(e) => setLeadForm({ ...leadForm, status: e.target.value })}
-                    className="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer text-sm"
+                    className="block w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 cursor-pointer text-xs"
                   >
                     <option value="NEW">New</option>
                     <option value="CONTACTED">Contacted</option>
@@ -601,11 +626,11 @@ const Dashboard = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">Source</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Source</label>
                   <select
                     value={leadForm.source}
                     onChange={(e) => setLeadForm({ ...leadForm, source: e.target.value })}
-                    className="block w-full px-3 py-2.5 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer text-sm"
+                    className="block w-full px-3 py-2 bg-slate-50 border border-slate-200 dark:bg-slate-950 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 cursor-pointer text-xs"
                   >
                     <option value="WEBSITE">Website</option>
                     <option value="INSTAGRAM">Instagram</option>
@@ -614,26 +639,28 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="flex gap-3 justify-end pt-4 mt-6">
+              <div className="flex gap-2 justify-end pt-3 mt-4 border-t border-slate-100 dark:border-slate-850">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-300 dark:hover:text-white rounded-xl text-sm font-semibold transition-colors border border-slate-200 dark:border-slate-850"
+                  className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-300 dark:hover:text-white rounded-lg text-xs font-semibold transition-colors border border-slate-200 dark:border-slate-850 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white rounded-xl text-sm font-semibold transition-all shadow-md shadow-indigo-650/10 dark:shadow-indigo-900/20 disabled:opacity-50"
+                  className="px-4 py-2 bg-slate-900 hover:bg-slate-850 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 border border-slate-900 dark:border-white rounded-lg text-xs font-semibold transition-all shadow-sm disabled:opacity-50 cursor-pointer"
                 >
                   {submitting ? 'Saving...' : 'Save Lead'}
                 </button>
               </div>
             </form>
+
           </div>
         </div>
       )}
+
     </div>
   );
 };
