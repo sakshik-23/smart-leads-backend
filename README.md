@@ -1,4 +1,4 @@
-Smart Leads CRM Portal
+### Smart Leads CRM Portal ###
 
 A secure, full-stack lead management platform designed to organize sales pipelines, trace conversion metrics, and manage user roles.
 
