@@ -13,5 +13,7 @@ A secure, full-stack lead management platform designed to organize sales pipelin
 ## 🛠️ Technology Stack
 
 Backend: Java 17, Spring Boot, Spring Security (JWT), Spring Data JPA, Hibernate, MySQL.
+
 Frontend: React.js, Vite, Tailwind CSS, Axios, Lucide Icons.
+
 Hosting/Deploy: Render (App), Aiven (MySQL Cloud DB), Docker.
