@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../utils/api';
-import { Lock, Mail, AlertCircle, ArrowRight, Sun, Moon, GraduationCap } from 'lucide-react';
+import { Lock, Mail, AlertCircle, ArrowRight, Sun, Moon } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -74,10 +74,6 @@ const Login = () => {
       <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm p-8 relative overflow-hidden">
         
         <div className="flex flex-col items-center mb-6">
-          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[10px] font-semibold text-slate-655 dark:text-slate-400 font-mono mb-4">
-            <GraduationCap className="w-3.5 h-3.5 text-indigo-500" />
-            Student Submission Portal
-          </div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight text-center">Smart Lead CRM</h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 text-center">Sign in to access your sales lead database</p>
         </div>
@@ -102,7 +98,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
-                placeholder="student@college.edu"
+                placeholder="you@example.com"
               />
             </div>
           </div>
@@ -147,12 +143,12 @@ const Login = () => {
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Don't have an account?{' '}
             <Link to="/register" className="text-slate-850 hover:underline dark:text-white font-semibold">
-              Create student account
+              Create an account
             </Link>
           </p>
           <div className="mt-4">
             <Link to="/" className="text-xs text-slate-400 hover:text-slate-655 dark:text-slate-500 dark:hover:text-slate-400 transition-colors">
-              ← Back to Project Landing Page
+              ← Back to Landing Page
             </Link>
           </div>
         </div>

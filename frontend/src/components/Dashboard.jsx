@@ -4,7 +4,7 @@ import api from '../utils/api';
 import {
   LogOut, Plus, Search, RefreshCw, Download, Trash2, Edit,
   Database, ChevronLeft, ChevronRight, Phone, CheckCircle,
-  XCircle, TrendingUp, Compass, Sun, Moon, GraduationCap, LayoutDashboard
+  XCircle, TrendingUp, Compass, Sun, Moon, LayoutDashboard
 } from 'lucide-react';
 
 const Dashboard = () => {
@@ -257,15 +257,9 @@ const Dashboard = () => {
             <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 font-bold border border-slate-200 dark:border-slate-800">
               SL
             </div>
-            <div>
-              <h1 className="text-base font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
-                Smart Lead CRM
-                <span className="hidden sm:inline-flex items-center gap-0.5 px-2 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-750 rounded text-[9px] font-semibold text-slate-500 font-mono">
-                  STUDENT PORTAL
-                </span>
-              </h1>
-              <p className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">MCA CAPSTONE PROJECT</p>
-            </div>
+            <h1 className="text-base font-bold tracking-tight text-slate-900 dark:text-white">
+              Smart Lead CRM
+            </h1>
           </div>
           
           <div className="flex items-center gap-4">
@@ -574,7 +568,11 @@ const Dashboard = () => {
             
             <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-150 dark:border-slate-850">
               <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <GraduationCap className="w-4 h-4 text-indigo-500" />
+                {editingLeadId ? (
+                  <Edit className="w-4 h-4 text-indigo-500" />
+                ) : (
+                  <Plus className="w-4 h-4 text-indigo-500" />
+                )}
                 {editingLeadId ? 'Modify Lead Record' : 'Record New Sourced Lead'}
               </h3>
               <button

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../utils/api';
-import { User, Mail, Lock, Briefcase, AlertCircle, ArrowRight, Sun, Moon, GraduationCap } from 'lucide-react';
+import { User, Mail, Lock, Briefcase, AlertCircle, ArrowRight, Sun, Moon } from 'lucide-react';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -75,12 +75,8 @@ const Register = () => {
       <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm p-8 relative overflow-hidden">
         
         <div className="flex flex-col items-center mb-6">
-          <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[10px] font-semibold text-slate-655 dark:text-slate-400 font-mono mb-4">
-            <GraduationCap className="w-3.5 h-3.5 text-indigo-500" />
-            Student Registration Portal
-          </div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight text-center">Create Account</h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 text-center">Register to start managing your student CRM database</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 text-center">Register to start managing your CRM database</p>
         </div>
 
         {error && (
@@ -127,7 +123,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
-                placeholder="student@college.edu"
+                placeholder="you@example.com"
               />
             </div>
           </div>
@@ -160,8 +156,8 @@ const Register = () => {
                 onChange={(e) => setRole(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all appearance-none cursor-pointer text-xs"
               >
-                <option value="SALES">Sales Rep (Manage Assigned Leads)</option>
-                <option value="ADMIN">Administrator (Manage All Leads + Delete)</option>
+                <option value="SALES">Sales User</option>
+                <option value="ADMIN">Administrator</option>
               </select>
             </div>
           </div>
@@ -194,7 +190,7 @@ const Register = () => {
           </p>
           <div className="mt-4">
             <Link to="/" className="text-xs text-slate-400 hover:text-slate-655 dark:text-slate-500 dark:hover:text-slate-400 transition-colors">
-              ← Back to Project Landing Page
+              ← Back to Landing Page
             </Link>
           </div>
         </div>

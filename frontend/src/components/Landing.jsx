@@ -10,7 +10,6 @@ import {
   Download, 
   ShieldCheck, 
   CheckCircle2, 
-  GraduationCap, 
   Database, 
   GitBranch, 
   LayoutDashboard 
@@ -128,7 +127,7 @@ const Landing = () => {
                   to="/register"
                   className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-lg border border-slate-900 dark:border-white hover:bg-slate-800 dark:hover:bg-slate-100 transition-all flex items-center gap-2 text-sm cursor-pointer shadow-sm"
                 >
-                  Create Student Demo Account
+                  Create Account
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
@@ -150,7 +149,7 @@ const Landing = () => {
             Core Project Features & Implementation
           </h2>
           <p className="text-sm text-slate-400 dark:text-slate-500 mt-2">
-            Key software modules designed and built during the capstone cycle.
+            Key software modules designed and built for enterprise lead tracking.
           </p>
         </div>
 
