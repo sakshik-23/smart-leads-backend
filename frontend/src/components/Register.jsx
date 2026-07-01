@@ -51,7 +51,7 @@ const Register = () => {
       }, 2000);
     } catch (err) {
       setError(
-        err.response?.data?.message || 
+        err.response?.data?.message ||
         'Registration failed. Please check your inputs.'
       );
       setLoading(false);
@@ -60,7 +60,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 transition-colors duration-200 relative bg-grid-dots font-sans">
-      
+
       {/* Floating Theme Toggle */}
       <div className="absolute top-4 right-4 z-10">
         <button
@@ -73,7 +73,7 @@ const Register = () => {
       </div>
 
       <div className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm p-8 relative overflow-hidden">
-        
+
         <div className="flex flex-col items-center mb-6">
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight text-center">Create Account</h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 text-center">Register to start managing your CRM database</p>
@@ -106,7 +106,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
-                placeholder="John Doe"
+                placeholder="Enter Your Name"
               />
             </div>
           </div>
@@ -123,7 +123,7 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
-                placeholder="you@example.com"
+                placeholder="Enter your email"
               />
             </div>
           </div>
@@ -140,7 +140,7 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="block w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-450 dark:focus:ring-slate-700 transition-all text-xs"
-                placeholder="••••••••"
+                placeholder="Enter password"
               />
             </div>
           </div>
