@@ -13,6 +13,21 @@ import lombok.Setter;
 @Setter
 public class LeadRequest {
 
+    @NotBlank(message = "Lead name is required")
+    private String name;
+
+    @NotBlank(message = "Lead email is required")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @NotNull(message = "Lead status is required")
+    private LeadStatus status;
+
+    @NotNull(message = "Lead source is required")
+    private LeadSource source;
+
+    private Long assignedToId;
+
     public String getName() {
         return name;
     }
@@ -52,19 +67,4 @@ public class LeadRequest {
     public void setAssignedToId(Long assignedToId) {
         this.assignedToId = assignedToId;
     }
-
-    @NotBlank(message = "Lead name is required")
-    private String name;
-
-    @NotBlank(message = "Lead email is required")
-    @Email(message = "Invalid email format")
-    private String email;
-
-    @NotNull(message = "Lead status is required")
-    private LeadStatus status;
-
-    @NotNull(message = "Lead source is required")
-    private LeadSource source;
-
-    private Long assignedToId;
 }

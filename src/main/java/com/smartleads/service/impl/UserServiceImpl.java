@@ -12,12 +12,15 @@ import com.smartleads.dto.request.RegisterRequest;
 import com.smartleads.dto.response.JwtResponse;
 import com.smartleads.dto.response.UserResponse;
 import com.smartleads.entity.User;
+import com.smartleads.enums.Role;
 import com.smartleads.exception.EmailAlreadyExistsException;
 import com.smartleads.repository.UserRepository;
 import com.smartleads.service.UserService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService{
+@Transactional
+public class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
@@ -47,7 +50,7 @@ public class UserServiceImpl implements UserService{
 		user.setName(request.getName());
 		user.setEmail(request.getEmail());
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
-		user.setRole(request.getRole());
+		user.setRole(request.getRole() != null ? request.getRole() : Role.SALES);
 
         User savedUser = userRepository.save(user);
 

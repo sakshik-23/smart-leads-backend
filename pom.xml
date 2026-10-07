@@ -127,6 +127,8 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+							<showDeprecation>true</showDeprecation>
+							<showWarnings>true</showWarnings>
 							<annotationProcessorPaths>
 								<path>
 									<groupId>org.projectlombok</groupId>

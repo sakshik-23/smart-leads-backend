@@ -10,6 +10,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterRequest {
+
+	@NotBlank(message = "Name is required")
+	private String name;
+	
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email format")
+	private String email;
+	
+	@NotBlank(message = "Password is required")
+	private String password;
+	
+	private Role role;
 	
 	public String getName() {
 		return name;
@@ -42,16 +54,4 @@ public class RegisterRequest {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	@NotBlank(message = "Name is required")
-	private String name;
-	
-	@Email(message = "Invalid email")
-	private String email;
-	
-	@NotBlank(message = "Password is required")
-	private String password;
-	
-	private Role role;
-
 }
